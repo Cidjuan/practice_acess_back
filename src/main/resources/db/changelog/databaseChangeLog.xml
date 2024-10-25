@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+<changeSet id="2024-10-24-1" author="juan.cordova">
+<createTable tableName="medicinetype">
+<column name="medicine_type_id" type="UUID">
+<constraints primaryKey="true"/>
+</column>
+<column name="description" type="VARCHAR(255)">
+<constraints nullable="false"/>
+</column>
+</createTable>
+
+<insert tableName="medicinetype">
+<column name="medicine_type_id" value="d25bf64e-45d1-4d71-a207-bc942bd54543"/>
+<column name="description" value="ESTUPEFACIENTE"/>
+</insert>
+<insert tableName="medicinetype">
+<column name="medicine_type_id" value="43c431f9-3e9e-4df9-9c50-005c1344565c"/>
+<column name="description" value="PSICOTROPICO"/>
+</insert>
+<insert tableName="medicinetype">
+<column name="medicine_type_id" value="1c5bc4a9-1e75-4f07-bb4f-41b3c142ac69"/>
+<column name="description" value="PRECURSOR_QUIMICO"/>
+</insert>
+</changeSet>
+
+<changeSet id="2024-10-24-2" author="juan.cordova">
+<createTable tableName="medicine">
+<column name="medicine_id" type="UUID">
+<constraints primaryKey="true"/>
+</column>
+<column name="health_record" type="VARCHAR(255)">
+<constraints nullable="false"/>
+</column>
+<column name="description" type="VARCHAR(255)"/>
+<column name="manufacturer" type="VARCHAR(255)">
+<constraints nullable="false"/>
+</column>
+<column name="medicine_type_id" type="UUID">
+<constraints nullable="false"/>
+</column>
+</createTable>
+</changeSet>
+
+    <changeSet id="2024-10-24-3" author="juan.cordova">
+    <addForeignKeyConstraint baseColumnNames="medicine_type_id" baseTableName="medicine"
+                             constraintName="medicine_medicine_type_medicine_type_id" deferrable="false"
+                             initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                             referencedColumnNames="medicine_type_id" referencedTableName="medicinetype" validate="true"/>
+</changeSet>
+
+</databaseChangeLog>
